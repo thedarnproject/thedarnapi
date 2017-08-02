@@ -1,0 +1,10 @@
+package: github.com/thedarnproject/thedarnapi
+import:
+- package: github.com/golang/protobuf
+  subpackages:
+  - proto
+- package: golang.org/x/net
+  subpackages:
+  - context
+- package: google.golang.org/grpc
+  version: v1.5.1
