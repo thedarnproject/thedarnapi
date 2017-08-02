@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package darn;
+
+service ErrorIn {
+    rpc Submit(Data) returns(Success) {}
+}
+
+message Data {
+    string plugin = 1;
+    string error = 2;
+    string platform = 3;
+}
+
+message Success {
+    bool success = 1;
+}
