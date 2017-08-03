@@ -14,6 +14,7 @@ import (
 type errorInput struct{}
 
 func (*errorInput) Submit(ctx context.Context, data *api.Data) (*api.Success, error) {
+	fmt.Printf("received data: %v", data)
 	return &api.Success{Success: true}, nil
 }
 
@@ -27,6 +28,8 @@ func main() {
 	}
 	grpcServer := grpc.NewServer()
 	api.RegisterErrorInServer(grpcServer, &errorInput{})
-	grpcServer.Serve(lis)
+	if grpcServer.Serve(lis) != nil {
+		log.Fatalf("error service the API: %v", err)
+	}
 
 }
