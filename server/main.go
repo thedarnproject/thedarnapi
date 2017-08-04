@@ -3,33 +3,41 @@ package main
 import (
 	"flag"
 	"fmt"
-	"golang.org/x/net/context"
 	"log"
 	"net"
+
+	"golang.org/x/net/context"
 
 	api "github.com/thedarnproject/thedarnapi/api"
 	"google.golang.org/grpc"
 )
 
+const (
+	listenPort = 8081
+)
+
 type errorInput struct{}
 
 func (*errorInput) Submit(ctx context.Context, data *api.Data) (*api.Success, error) {
-	fmt.Printf("received data: %v", data)
+	if len(data.Plugin) == 0 || len(data.Platform) == 0 || len(data.Error) == 0 {
+		return nil, fmt.Errorf("invalid data submitted, make sure all the fields are populated: %v", data)
+	}
 	return &api.Success{Success: true}, nil
 }
 
 func main() {
-	port := flag.Int("p", 8080, "port to listen to")
-
+	port := flag.Int("p", listenPort, "port to listen to")
 	flag.Parse()
+
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Fatalf("server failed to start listening: %v", err)
 	}
+
 	grpcServer := grpc.NewServer()
 	api.RegisterErrorInServer(grpcServer, &errorInput{})
 	if grpcServer.Serve(lis) != nil {
-		log.Fatalf("error service the API: %v", err)
+		log.Fatalf("error serving the API: %v", err)
 	}
 
 }
