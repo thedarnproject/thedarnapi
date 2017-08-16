@@ -14,8 +14,7 @@ deploy:
   repo: thedarnproject/thedarnapi
   file: "./.bintray.json"
   user: "${BINTRAY_USER}"
-  key:
-    secure: FazB5ebmPK55ybtfkIq+EDhcxt7mf8b38hZOKpGv6pD8TIsQI2nVwWUCBy3164uOo8GcTx0k9e+ykHqoTDomPO9Y0qwsDHUITpDmVZgstlPQvv0wwS7wdeZhMYW2uUrWAMwclHkuZvUuJ5R/o/T0SZKdZN0v6bUNIzf4/SI8dfwSLRx6wAd5pYRXvnbagRix0JWDOjfBjMebvfl43u9B4zo8Z26JKtTRK+M3FHCxq3O5TUMS8ntYrMrdpHsDFSFttUgtuBJ6bq2J967wg4oD5Nox6391Zlh8Ruk/9qWP8L5D+8E/TodPK7mIuqYT12uViUqcC7Nt0Op4p41MIVSuzMp+YAOYxgJp4q8GzcqDE3dRhXqbIAkZ5tuuRWIS/Tl/q4Jnf0PaEtKEsEwE+tKHbsbaGPtMI5zkcSJLchAyLf4ZDHCtaWr1iucGUBor4tJKn9/WPoiY+3ht4N4Pn81pARLzrIb5mtXGGzu52FKI8iW+0NEDIMZEJZn5beW8yqffJd13rkJBWI2IWog8jSwoqWvjquZY/ojmx0/zInvi7O9IRZAV7yGdD67i/tUsBnpYFkglXa/9RVTTJrT/pNpBAOybIXNvhTNpKewDFgNbHyhKAnaJ262zlwpq3PX9GWIKoYNf28BSJ/JUdap5sh1zXp6KIoT8jbxi+hW8CThexcI=
+  key: "${BINTRAY_KEY}"
   skip_cleanup: true
   on:
     branch: "**"
