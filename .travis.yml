@@ -1,28 +1,21 @@
 dist: trusty
-
 language: go
-
 go_import_path: github.com/thedarnproject/thedarnapi
-
 matrix:
   include:
   - go: 1.7
   - go: 1.8
-
 install:
 - true
-
 before_deploy:
-- make binary
 - "./scripts/generate-bintray-json.sh"
-
 deploy:
   provider: bintray
   repo: thedarnproject/thedarnapi
   file: "./.bintray.json"
   user: "${BINTRAY_USER}"
   key:
-    secure: m+tlyMk4uwHn8qTZxV3pOEEEkq19BjMPAY/ojYS+qGTCShvmFWT7ZjD3d1W+F7Fmdzj0Tsucjw8667zfamxJDX1uGh9UOEB/dMPyoeQjx0SDyvz3aeoQWGRS1OcLx71JI4rd9AgTSCQSVdPPWCI/NE43iXmsig1Rq4fisap2oOzexUTAnAfp3fv0itYo6lKrh6+8047497XSEexEE00aPPoq/UxPjMW9V6nOLh8nQQ0GJjaBwrZOrn7AuE39mUoiy52Akl3fZBu/7NcI60nqYbk9E+hRyNWpYVW7iELEQezxFdhl6BMdmD+8fdeAiL1Vv43ccbd7uXnM9EHME69vaopThmA4eeuhH/P1Z7G4yjgStG4zm03tpV3BM9q/vKQMlw4yoFvIP74HAYR6PVDgDzAFmhZQNYGlI87jiIPR6PqBEhQkAiz8WrrIIMkybDrA/q0AgWXiEwROZFxDeUviBI5dOTSZFMlHB+96stvd2piS6pPFYG3MOnU4nllPUcpK7ctdRfztMcPh32Ppw0+O7LN1akx3vp8F4aV2GaC1qRGO3ZasWLT7UhTAEn7vn3eBdp9g4+PWtzJM4weinlQqQ1bm86kGQf1Nv7SqJveXesUDGqlOdpHvJbwxK/ULEBk/Wte3Ka7+pAnD2XFLkBa53kxsKmWov2chQduJSuop8Cg=
+    secure: FazB5ebmPK55ybtfkIq+EDhcxt7mf8b38hZOKpGv6pD8TIsQI2nVwWUCBy3164uOo8GcTx0k9e+ykHqoTDomPO9Y0qwsDHUITpDmVZgstlPQvv0wwS7wdeZhMYW2uUrWAMwclHkuZvUuJ5R/o/T0SZKdZN0v6bUNIzf4/SI8dfwSLRx6wAd5pYRXvnbagRix0JWDOjfBjMebvfl43u9B4zo8Z26JKtTRK+M3FHCxq3O5TUMS8ntYrMrdpHsDFSFttUgtuBJ6bq2J967wg4oD5Nox6391Zlh8Ruk/9qWP8L5D+8E/TodPK7mIuqYT12uViUqcC7Nt0Op4p41MIVSuzMp+YAOYxgJp4q8GzcqDE3dRhXqbIAkZ5tuuRWIS/Tl/q4Jnf0PaEtKEsEwE+tKHbsbaGPtMI5zkcSJLchAyLf4ZDHCtaWr1iucGUBor4tJKn9/WPoiY+3ht4N4Pn81pARLzrIb5mtXGGzu52FKI8iW+0NEDIMZEJZn5beW8yqffJd13rkJBWI2IWog8jSwoqWvjquZY/ojmx0/zInvi7O9IRZAV7yGdD67i/tUsBnpYFkglXa/9RVTTJrT/pNpBAOybIXNvhTNpKewDFgNbHyhKAnaJ262zlwpq3PX9GWIKoYNf28BSJ/JUdap5sh1zXp6KIoT8jbxi+hW8CThexcI=
   skip_cleanup: true
   on:
     branch: "**"
