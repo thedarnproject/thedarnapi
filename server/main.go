@@ -20,6 +20,7 @@ const (
 type errorInput struct{}
 
 func (*errorInput) Submit(ctx context.Context, data *api.Data) (*api.Success, error) {
+	logrus.Infof("received data:\n%#v", *data)
 	if len(data.Plugin) == 0 || len(data.Platform) == 0 || len(data.Error) == 0 {
 		return nil, fmt.Errorf("invalid data submitted, make sure all the fields are populated: %v", data)
 	}
