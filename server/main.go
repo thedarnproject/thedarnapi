@@ -6,9 +6,10 @@ import (
 	"log"
 	"net"
 
-	"golang.org/x/net/context"
-
 	api "github.com/thedarnproject/thedarnapi/api"
+
+	"github.com/Sirupsen/logrus"
+	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
 
@@ -31,13 +32,14 @@ func main() {
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
-		log.Fatalf("server failed to start listening: %v", err)
+		logrus.Fatalf("server failed to start listening: %v", err)
 	}
 
 	grpcServer := grpc.NewServer()
 	api.RegisterErrorInServer(grpcServer, &errorInput{})
+
+	logrus.Infof("starting the server at %v", listenPort)
 	if grpcServer.Serve(lis) != nil {
 		log.Fatalf("error serving the API: %v", err)
 	}
-
 }
