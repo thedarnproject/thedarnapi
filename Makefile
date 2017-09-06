@@ -11,6 +11,9 @@ binary:
 	mkdir -p bin
 	go build -o ${BIN_DIR}/thedarnapi ${SERVER_DIR}/main.go
 
+install:
+	cd ${SERVER_DIR}/ && go install
+
 clean:
 	rm -rf bin/
 
