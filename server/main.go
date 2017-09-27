@@ -6,9 +6,8 @@ import (
 	"log"
 	"net"
 
-	api "github.com/thedarnproject/thedarnapi/api"
-
 	"github.com/Sirupsen/logrus"
+	api "github.com/thedarnproject/thedarnapi/api"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
