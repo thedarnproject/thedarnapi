@@ -26,3 +26,6 @@ glide-vc:
 glide-hard:
 	rm -rf ~/.glide/
 	glide update --strip-vendor
+
+build-docker-image:
+	docker build -t containscafeine/thedarnapi:master .
