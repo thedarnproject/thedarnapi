@@ -2,8 +2,15 @@ syntax = "proto3";
 
 package darn;
 
+import "google/api/annotations.proto";
+
 service ErrorIn {
-    rpc Submit(Data) returns(Success) {}
+    rpc Submit(Data) returns(Success) {
+        option (google.api.http) = {
+            post: "/v1/submit"
+            body: "*"
+        };
+    }
 }
 
 message Data {
