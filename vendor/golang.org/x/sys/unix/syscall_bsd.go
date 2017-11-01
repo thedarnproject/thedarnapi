@@ -34,7 +34,7 @@ func Getgroups() (gids []int, err error) {
 		return nil, nil
 	}
 
-	// Sanity check group count.  Max is 16 on BSD.
+	// Sanity check group count. Max is 16 on BSD.
 	if n < 0 || n > 1000 {
 		return nil, EINVAL
 	}
@@ -607,12 +607,18 @@ func Futimes(fd int, tv []Timeval) error {
 
 //sys	fcntl(fd int, cmd int, arg int) (val int, err error)
 
+//sys   poll(fds *PollFd, nfds int, timeout int) (n int, err error)
+
+func Poll(fds []PollFd, timeout int) (n int, err error) {
+	if len(fds) == 0 {
+		return poll(nil, 0, timeout)
+	}
+	return poll(&fds[0], len(fds), timeout)
+}
+
 // TODO: wrap
 //	Acct(name nil-string) (err error)
 //	Gethostuuid(uuid *byte, timeout *Timespec) (err error)
-//	Madvise(addr *byte, len int, behav int) (err error)
-//	Mprotect(addr *byte, len int, prot int) (err error)
-//	Msync(addr *byte, len int, flags int) (err error)
 //	Ptrace(req int, pid int, addr uintptr, data int) (ret uintptr, err error)
 
 var mapper = &mmapper{
@@ -628,3 +634,11 @@ func Mmap(fd int, offset int64, length int, prot int, flags int) (data []byte, e
 func Munmap(b []byte) (err error) {
 	return mapper.Munmap(b)
 }
+
+//sys	Madvise(b []byte, behav int) (err error)
+//sys	Mlock(b []byte) (err error)
+//sys	Mlockall(flags int) (err error)
+//sys	Mprotect(b []byte, prot int) (err error)
+//sys	Msync(b []byte, flags int) (err error)
+//sys	Munlock(b []byte) (err error)
+//sys	Munlockall() (err error)

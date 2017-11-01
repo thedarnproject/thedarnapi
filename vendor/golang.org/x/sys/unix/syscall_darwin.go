@@ -54,7 +54,7 @@ func nametomib(name string) (mib []_C_int, err error) {
 
 	// NOTE(rsc): It seems strange to set the buffer to have
 	// size CTL_MAXNAME+2 but use only CTL_MAXNAME
-	// as the size.  I don't know why the +2 is here, but the
+	// as the size. I don't know why the +2 is here, but the
 	// kernel uses +2 for its own implementation of this function.
 	// I am scared that if we don't include the +2 here, the kernel
 	// will silently write 2 words farther than we specify
@@ -292,12 +292,6 @@ func IoctlGetTermios(fd int, req uint) (*Termios, error) {
 //sys	Mkdirat(dirfd int, path string, mode uint32) (err error)
 //sys	Mkfifo(path string, mode uint32) (err error)
 //sys	Mknod(path string, mode uint32, dev int) (err error)
-//sys	Mlock(b []byte) (err error)
-//sys	Mlockall(flags int) (err error)
-//sys	Mprotect(b []byte, prot int) (err error)
-//sys	Msync(b []byte, flags int) (err error)
-//sys	Munlock(b []byte) (err error)
-//sys	Munlockall() (err error)
 //sys	Open(path string, mode int, perm uint32) (fd int, err error)
 //sys	Openat(dirfd int, path string, mode int, perm uint32) (fd int, err error)
 //sys	Pathconf(path string, name int) (val int, err error)
@@ -374,9 +368,6 @@ func IoctlGetTermios(fd int, req uint) (*Termios, error) {
 // Add_profil
 // Kdebug_trace
 // Sigreturn
-// Mmap
-// Mlock
-// Munlock
 // Atsocket
 // Kqueue_from_portset_np
 // Kqueue_portset
@@ -386,7 +377,6 @@ func IoctlGetTermios(fd int, req uint) (*Termios, error) {
 // Searchfs
 // Delete
 // Copyfile
-// Poll
 // Watchevent
 // Waitevent
 // Modwatch
@@ -469,8 +459,6 @@ func IoctlGetTermios(fd int, req uint) (*Termios, error) {
 // Lio_listio
 // __pthread_cond_wait
 // Iopolicysys
-// Mlockall
-// Munlockall
 // __pthread_kill
 // __pthread_sigmask
 // __sigwait
