@@ -1,6 +1,7 @@
 PROTO_DIR := api
 BIN_DIR := bin
 SERVER_DIR := server
+REST_SERVER_DIR := server_rest
 PROTOBUF_DOWNLOAD_URL := https://github.com/google/protobuf/releases/download/v3.4.0/protoc-3.4.0-linux-x86_64.zip
 PROTOC_FILE := /tmp/protoc.zip
 PROTOC_TEMP_LOCATION := /tmp/protoc
@@ -36,6 +37,15 @@ reverse-protoc:
 binary:
 	mkdir -p bin
 	go build -o ${BIN_DIR}/thedarnapi ${SERVER_DIR}/main.go
+	go build -o ${BIN_DIR}/thedarnapi-rest ${REST_SERVER_DIR}/main.go
+
+deploy:
+	${BIN_DIR}/thedarnapi &
+	${BIN_DIR}/thedarnapi-rest &
+
+kill:
+	killall thedarnapi
+	killall thedarnapi-rest
 
 install:
 	cd ${SERVER_DIR}/ && go install
