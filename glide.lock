@@ -1,6 +1,8 @@
-hash: a3e8300001d49ddc021bae7dc46355846a3ef6a792abb9e621706343bad3270c
-updated: 2017-11-01T18:55:47.882729978+05:30
+hash: 5df31d63404d80e7486d03fa1df52a7568980c5edaf6efd15a8da1e9f213a1bc
+updated: 2017-11-01T20:49:58.561607064+05:30
 imports:
+- name: github.com/golang/glog
+  version: 23def4e6c14b4da8ac2ed8007337bc5eb5007998
 - name: github.com/golang/protobuf
   version: 1643683e1b54a9e88ad26d98f81400c8c9d9f4f9
   subpackages:
@@ -15,6 +17,8 @@ imports:
   - runtime
   - runtime/internal
   - utilities
+- name: github.com/pkg/errors
+  version: 645ef00459ed84a119197bfb8d8205042c6df63d
 - name: github.com/Sirupsen/logrus
   version: f006c2ac4710855cf0f916dd6b77acf6b048dc6e
 - name: golang.org/x/crypto
@@ -37,7 +41,7 @@ imports:
   - unix
   - windows
 - name: golang.org/x/text
-  version: 3cfc6c0d6bf80d724d98c26c4822f4a35d37598e
+  version: 7d4e23b25beca3bc3b804ab134f0b12b4ca909d1
   subpackages:
   - secure/bidirule
   - transform

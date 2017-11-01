@@ -10,3 +10,6 @@ import:
   version: v1.5.2
 - package: github.com/Sirupsen/logrus
   version: v1.0.3
+- package: github.com/pkg/errors
+  version: v0.8.0
+

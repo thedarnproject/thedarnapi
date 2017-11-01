@@ -5,15 +5,14 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"strconv"
 
 	"github.com/Sirupsen/logrus"
 	api "github.com/thedarnproject/thedarnapi/api"
+	"github.com/thedarnproject/thedarnapi/constants"
+	"github.com/thedarnproject/thedarnapi/util"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-)
-
-const (
-	listenPort = 8081
 )
 
 type errorInput struct{}
@@ -27,6 +26,14 @@ func (*errorInput) Submit(ctx context.Context, data *api.Data) (*api.Success, er
 }
 
 func main() {
+
+	listenPort, err := strconv.Atoi(util.GetEnvVarOrDefault(
+		constants.GRPCPortEnvVarName,
+		constants.GRPCListenPort))
+	if err != nil {
+		logrus.Fatalf("unable to convert string to int: %v", err)
+	}
+
 	port := flag.Int("p", listenPort, "port to listen to")
 	flag.Parse()
 

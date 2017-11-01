@@ -1,42 +1,51 @@
 package main
 
 import (
-  "flag"
-  "net/http"
+	"flag"
+	"net/http"
 
-  "github.com/golang/glog"
-  "golang.org/x/net/context"
-  "github.com/grpc-ecosystem/grpc-gateway/runtime"
-  "google.golang.org/grpc"
-	
-  gw "github.com/thedarnproject/thedarnapi/api"
-)
+	"github.com/golang/glog"
+	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 
-var (
-  echoEndpoint = flag.String("echo_endpoint", "localhost:8081", "endpoint of YourService")
+	"fmt"
+
+	"github.com/Sirupsen/logrus"
+	gw "github.com/thedarnproject/thedarnapi/api"
+	"github.com/thedarnproject/thedarnapi/constants"
+	"github.com/thedarnproject/thedarnapi/util"
 )
 
 func run() error {
-  ctx := context.Background()
-  ctx, cancel := context.WithCancel(ctx)
-  defer cancel()
 
-  mux := runtime.NewServeMux()
-  opts := []grpc.DialOption{grpc.WithInsecure()}
-  err := gw.RegisterErrorInHandlerFromEndpoint(ctx, mux, *echoEndpoint, opts)
-  if err != nil {
-    return err
-  }
+	GRPCPort := util.GetEnvVarOrDefault(constants.GRPCPortEnvVarName, constants.GRPCListenPort)
+	logrus.Infof("detected gRPC on port %v", GRPCPort)
 
-  return http.ListenAndServe(":8080", mux)
+	RESTPort := util.GetEnvVarOrDefault(constants.RESTPortEnvVarName, constants.RESTListenPort)
+
+	echoEndpoint := flag.String("echo_endpoint", fmt.Sprintf("localhost:%v", GRPCPort), "gRPC endpoint")
+
+	ctx := context.Background()
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
+
+	mux := runtime.NewServeMux()
+	opts := []grpc.DialOption{grpc.WithInsecure()}
+	err := gw.RegisterErrorInHandlerFromEndpoint(ctx, mux, *echoEndpoint, opts)
+	if err != nil {
+		return err
+	}
+
+	logrus.Infof("starting REST server on port %v", RESTPort)
+	return http.ListenAndServe(fmt.Sprintf(":%v", RESTPort), mux)
 }
 
 func main() {
-  flag.Parse()
-  defer glog.Flush()
+	flag.Parse()
+	defer glog.Flush()
 
-  if err := run(); err != nil {
-    glog.Fatal(err)
-  }
+	if err := run(); err != nil {
+		glog.Fatal(err)
+	}
 }
-
