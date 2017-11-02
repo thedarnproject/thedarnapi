@@ -1,6 +1,0 @@
-name: thedarnapi
-containers:
-- image: containscafeine/thedarnapi:master
-services:
-- portMappings:
-  - 8081:8081

@@ -2,6 +2,6 @@ FROM centos:7
 
 LABEL maintainer="shubham@linux.com"
 
-COPY bin/ /bin/
+COPY bin/ build/entrypoint.sh /bin/
 
-CMD ["thedarnapi"]
+ENTRYPOINT /bin/entrypoint.sh
