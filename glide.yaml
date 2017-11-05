@@ -12,4 +12,5 @@ import:
   version: v1.0.3
 - package: github.com/pkg/errors
   version: v0.8.0
-
+- package: github.com/gorilla/handlers
+  version: v1.3.0

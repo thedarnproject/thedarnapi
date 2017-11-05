@@ -1,5 +1,5 @@
-hash: 5df31d63404d80e7486d03fa1df52a7568980c5edaf6efd15a8da1e9f213a1bc
-updated: 2017-11-01T20:49:58.561607064+05:30
+hash: 38d501172c0b455d9747dc9460a8b5c54b29f48fcb31e1ef048d1731fc88cd1a
+updated: 2017-11-05T13:18:11.835184286+05:30
 imports:
 - name: github.com/golang/glog
   version: 23def4e6c14b4da8ac2ed8007337bc5eb5007998
@@ -11,8 +11,10 @@ imports:
   - protoc-gen-go/descriptor
   - ptypes/any
   - ptypes/struct
+- name: github.com/gorilla/handlers
+  version: 90663712d74cb411cbef281bc1e08c19d1a76145
 - name: github.com/grpc-ecosystem/grpc-gateway
-  version: b0be3cdef0ed27e3c420795e2efbfe9c27e839cc
+  version: 8cc3a55af3bcf171a1c23a90c4df9cf591706104
   subpackages:
   - runtime
   - runtime/internal
@@ -26,7 +28,7 @@ imports:
   subpackages:
   - ssh/terminal
 - name: golang.org/x/net
-  version: c73622c77280266305273cb545f54516ced95b93
+  version: 01c190206fbdffa42f334f4b2bf2220f50e64920
   subpackages:
   - context
   - http2
@@ -36,19 +38,19 @@ imports:
   - lex/httplex
   - trace
 - name: golang.org/x/sys
-  version: 95c6576299259db960f6c5b9b69ea52422860fce
+  version: 8eb05f94d449fdf134ec24630ce69ada5b469c1c
   subpackages:
   - unix
   - windows
 - name: golang.org/x/text
-  version: 7d4e23b25beca3bc3b804ab134f0b12b4ca909d1
+  version: 88f656faf3f37f690df1a32515b479415e1a6769
   subpackages:
   - secure/bidirule
   - transform
   - unicode/bidi
   - unicode/norm
 - name: google.golang.org/genproto
-  version: 03951f3b52582ecab79e5a37a86b5a20c5f64df7
+  version: 11c7f9e547da6db876260ce49ea7536985904c9b
   subpackages:
   - googleapis/api/annotations
   - googleapis/rpc/status
