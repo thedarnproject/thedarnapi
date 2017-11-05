@@ -5,10 +5,10 @@ import (
 )
 
 // Gets the value for the given environment variable, or sets the given default
-func GetEnvVarOrDefault(env string, def string) string {
-	envVar := os.Getenv(env)
-	if len(envVar) == 0 {
-		return def
+func GetEnvVarOrDefault(env, def string) string {
+	envVar, found := os.LookupEnv(env)
+	if found {
+		return envVar
 	}
-	return envVar
+	return def
 }
