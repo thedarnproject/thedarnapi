@@ -84,28 +84,34 @@ func getAnswerFromId(answerId int) (*answerStruct, error) {
 	return &unmarshalled, nil
 }
 
-func DarnIt(query string) error {
+func DarnIt(query string) (string, error) {
+
+	var fix string
+
 	// Get results
 	results, err := getResults(query)
 	if err != nil {
-		return errors.Wrap(err, "error getting results")
+		return "", errors.Wrap(err, "error getting results")
 	}
 
 	// Return error if no results
 	if len(results.Items) == 0 {
-		return errors.New("the query did not return any results")
+		return "", errors.New("the query did not return any results")
 	}
 
 	for priority, result := range results.Items[0:3] {
-		logrus.Infof("answer priority level: %v", priority)
 		if result.AcceptedAnswerID != 0 {
 			answer, err := getAnswerFromId(result.AcceptedAnswerID)
 			if err != nil {
-				return errors.Wrap(err, "unable to get answer from ID")
+				return "", errors.Wrap(err, "unable to get answer from ID")
 			}
-			logrus.Info(answer.Items[0].BodyMarkdown)
-			continue
+			logrus.Infof("suggesting answer:", answer.Items[0].BodyMarkdown)
+			fix = fix +
+				fmt.Sprintf("Priority %v fix -", priority) +
+				"\n" +
+				answer.Items[0].BodyMarkdown +
+				"\n"
 		}
 	}
-	return nil
+	return fix, nil
 }

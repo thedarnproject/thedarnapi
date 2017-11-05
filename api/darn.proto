@@ -5,7 +5,7 @@ package darn;
 import "google/api/annotations.proto";
 
 service ErrorIn {
-    rpc Submit(Data) returns(Success) {
+    rpc Submit(Data) returns(Fix) {
         option (google.api.http) = {
             post: "/v1/submit"
             body: "*"
@@ -20,6 +20,6 @@ message Data {
     string platform = 4;
 }
 
-message Success {
-    bool success = 1;
+message Fix {
+    string fix = 1;
 }

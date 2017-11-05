@@ -19,17 +19,17 @@ import (
 
 type errorInput struct{}
 
-func (*errorInput) Submit(ctx context.Context, data *api.Data) (*api.Success, error) {
+func (*errorInput) Submit(ctx context.Context, data *api.Data) (*api.Fix, error) {
 	logrus.Infof("received data:\n%#v", *data)
 	if len(data.Plugin) == 0 || len(data.Platform) == 0 || len(data.Error) == 0 {
 		return nil, fmt.Errorf("invalid data submitted, make sure all the fields are populated: %v", data)
 	}
-
-	if err := stackoverflow.DarnIt(data.Error); err != nil {
+	fix, err := stackoverflow.DarnIt(data.Error)
+	if err != nil {
 		return nil, errors.Wrap(err, "unable to DarnIt for StackOverflow data source")
 	}
 
-	return &api.Success{Success: true}, nil
+	return &api.Fix{Fix: fix}, nil
 }
 
 func main() {
