@@ -1,6 +1,7 @@
 name: thedarnapi
 containers:
 - image: containscafeine/thedarnapi:master
+  imagePullPolicy: Always
   env:
   - name: DARN_GRPC_PORT
     value: "9000"
