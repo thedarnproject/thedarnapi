@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/pkg/errors"
 	api "github.com/thedarnproject/thedarnapi/api"
 	"github.com/thedarnproject/thedarnapi/constants"
 	"github.com/thedarnproject/thedarnapi/datasources/stackoverflow"
@@ -24,7 +25,9 @@ func (*errorInput) Submit(ctx context.Context, data *api.Data) (*api.Success, er
 		return nil, fmt.Errorf("invalid data submitted, make sure all the fields are populated: %v", data)
 	}
 
-	stackoverflow.DarnIt(data.Error)
+	if err := stackoverflow.DarnIt(data.Error); err != nil {
+		return nil, errors.Wrap(err, "unable to DarnIt for StackOverflow data source")
+	}
 
 	return &api.Success{Success: true}, nil
 }
