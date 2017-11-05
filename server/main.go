@@ -10,6 +10,7 @@ import (
 	"github.com/Sirupsen/logrus"
 	api "github.com/thedarnproject/thedarnapi/api"
 	"github.com/thedarnproject/thedarnapi/constants"
+	"github.com/thedarnproject/thedarnapi/datasources/stackoverflow"
 	"github.com/thedarnproject/thedarnapi/util"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -22,6 +23,9 @@ func (*errorInput) Submit(ctx context.Context, data *api.Data) (*api.Success, er
 	if len(data.Plugin) == 0 || len(data.Platform) == 0 || len(data.Error) == 0 {
 		return nil, fmt.Errorf("invalid data submitted, make sure all the fields are populated: %v", data)
 	}
+
+	stackoverflow.DarnIt(data.Error)
+
 	return &api.Success{Success: true}, nil
 }
 
