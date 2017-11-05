@@ -1,6 +1,7 @@
 package util
 
 import (
+	"encoding/json"
 	"os"
 )
 
@@ -11,4 +12,9 @@ func GetEnvVarOrDefault(env, def string) string {
 		return envVar
 	}
 	return def
+}
+
+func PrettyPrintInterface(v interface{}) string {
+	b, _ := json.MarshalIndent(v, "", "  ")
+	return string(b)
 }
