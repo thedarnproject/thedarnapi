@@ -15,6 +15,8 @@ import (
 	gw "github.com/thedarnproject/thedarnapi/api"
 	"github.com/thedarnproject/thedarnapi/constants"
 	"github.com/thedarnproject/thedarnapi/util"
+	"os"
+	handlers "github.com/gorilla/handlers"
 )
 
 func run() error {
@@ -38,7 +40,7 @@ func run() error {
 	}
 
 	logrus.Infof("starting REST server on port %v", RESTPort)
-	return http.ListenAndServe(fmt.Sprintf(":%v", RESTPort), mux)
+	return http.ListenAndServe(fmt.Sprintf(":%v", RESTPort), handlers.LoggingHandler(os.Stdout, mux))
 }
 
 func main() {
