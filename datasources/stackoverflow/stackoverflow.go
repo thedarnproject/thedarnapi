@@ -99,7 +99,7 @@ func DarnIt(query string) (string, error) {
 		return "", errors.New("the query did not return any results")
 	}
 
-	for priority, result := range results.Items[0:3] {
+	for priority, result := range results.Items[0:1] {
 		if result.AcceptedAnswerID != 0 {
 			answer, err := getAnswerFromId(result.AcceptedAnswerID)
 			if err != nil {
